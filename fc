@@ -1,8 +1,14 @@
 https://github.com/bootlin/toolchains-builder.git
 
-./update_gitlab-ci.sh -t no_push -n 2025.02-1 -b toolchains.bootlin.com-2022.08.2 -a aarch64 -l glibc -v stable
-cp buildroot/.config config_aarch64
+./update_gitlab-ci.sh -t no_push -n 2025.03-1 -b toolchains.bootlin.com-2022.08.2 -a aarch64 -l glibc -v stable
+checkout to the new branch created
+./build-toolchain.sh aarch64--glibc--stable releases toolchains.bootlin.com-2022.08.2 1
+cp build/output/.config config_aarch64
 
-./update_gitlab-ci.sh -t no_push -n 2025.02-1 -b toolchains.bootlin.com-2022.08.2 -a x86-64 -l glibc -v stable
-cp buildroot/.config config_x86-64
+./update_gitlab-ci.sh -t no_push -n 2025.03-1 -b toolchains.bootlin.com-2022.08.2 -a x86-64 -l glibc -v stable
+checkout to the new branch created
+./build-toolchain.sh x86-64--glibc--stable releases toolchains.bootlin.com-2022.08.2 1
+cp build/output/.config config_x86-64
+
+Remember to delete usr from root and sysroot inside <arch>-buildroot-linux-gnu
 
