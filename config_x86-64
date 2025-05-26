@@ -151,6 +151,7 @@ BR2_BINUTILS_EXTRA_CONFIG_OPTIONS=""
 # BR2_GCC_VERSION_10_X is not set
 # BR2_GCC_VERSION_11_X is not set
 # BR2_GCC_VERSION_12_X is not set
+# BR2_GCC_VERSION_13_X is not set
 BR2_GCC_VERSION_14_X=y
 BR2_GCC_SUPPORTS_DLANG=y
 BR2_GCC_VERSION="14.3.0"
@@ -283,7 +284,7 @@ BR2_LZCAT="lzip -d -c"
 BR2_TAR_OPTIONS=""
 BR2_DEFCONFIG="$(CONFIG_DIR)/defconfig"
 BR2_DL_DIR="$(TOPDIR)/dl"
-BR2_HOST_DIR="/home/fc/dev/third_party/toolchains-builder/build/x86-64--glibc--stable-1"
+BR2_HOST_DIR="$(BASE_DIR)/host"
 
 #
 # Mirrors and Download locations
