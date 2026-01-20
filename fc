@@ -1,0 +1,37 @@
+https://github.com/bootlin/toolchains-builder.git
+
+- checkout master
+- ./update_gitlab-ci.sh -t no_push -n 2025.05-26 -b toolchains.bootlin.com-2022.08.2 -a x86-64 -l glibc -v stable
+- checkout to the new branch created
+- ./build-toolchain.sh x86-64--glibc--stable releases toolchains.bootlin.com-2022.08.2 1
+- cancel at ">>> host-skeleton"
+- cp build/output/.config this_repo_dir/config_x86-64
+- Edit this_repo_dir/config_x86-64
+  - To target gcc version while ensuring continuity:
+    - Correct:
+    | # BR2_GCC_VERSION_10_X is not set
+    | # BR2_GCC_VERSION_11_X is not set
+    | # BR2_GCC_VERSION_12_X is not set
+    | # BR2_GCC_VERSION_13_X is not set
+    | # BR2_GCC_VERSION_14_X is not set
+    | BR2_GCC_VERSION_15_X=y
+    | ...
+    | BR2_GCC_VERSION="15.2.0"
+
+    - Wrong:
+    | # BR2_GCC_VERSION_10_X is not set
+    | # BR2_GCC_VERSION_11_X is not set
+    | # BR2_GCC_VERSION_12_X is not set
+    | BR2_GCC_VERSION_15_X=y
+  - BR2_HOST_DIR from absolute path to "$(BASE_DIR)/host"
+
+- cd this_repo_dir
+- rm .config
+- cp config_x86-64 .config
+- rm -rf output
+- make
+- cd output/host
+- delete usr and x86-64-buildroot-linux-gnu/sysroot
+- tar -czvf ../<filename>.tar.gz *
+
+* Do the same for aarch64
